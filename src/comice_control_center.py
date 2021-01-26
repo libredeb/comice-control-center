@@ -1,0 +1,115 @@
+import sys
+from warnings import warn
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GLib, Gio, Gdk
+from widgets.connection_box import ConnectionsBox
+from widgets.disturb_box import DisturbBox
+from widgets.keyboard_brightness import KbdBrightnessBox
+from widgets.wireless_display import WirelessDisplayBox
+from widgets.display_level import DisplayLevelBox
+from widgets.sound_box import SoundLevelBox
+
+
+class Application(Gtk.Application):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(
+            *args,
+            application_id="com.github.libredeb.comice-control-center",
+            flags=Gio.ApplicationFlags.FLAGS_NONE,
+            **kwargs
+        )
+        self.window = None
+    
+    def do_activate(self):
+        if not self.window:
+            self.window = Gtk.ApplicationWindow(
+                application=self,
+                title="Control Center",
+                default_height = 300,
+                default_width = 260,
+                window_position = Gtk.WindowPosition.MOUSE
+            )
+            self.window.set_resizable (False);
+            self.window.set_skip_pager_hint (True);
+            self.window.set_skip_taskbar_hint (True);
+            self.window.set_decorated (False);
+            self.window.set_visual (self.window.get_screen().get_rgba_visual());
+            
+            # Move the window some pixels below
+            win_x = 0
+            win_y = 0
+            position = self.window.get_position()
+            self.window.move(position.root_x, position.root_y + 32)
+            
+            # CSS Styles
+            css_file = "./application.css"
+            css_provider = Gtk.CssProvider()
+
+            try:
+                css_provider.load_from_path(css_file)
+                Gtk.StyleContext.add_provider_for_screen(
+                    Gdk.Screen.get_default(),
+                    css_provider,
+                    Gtk.STYLE_PROVIDER_PRIORITY_USER
+                )
+            except Exception as err:
+                print("APP [ERROR LOADING CSS STYLES]")
+            
+            # Main Box and its organization
+            main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+            header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+            extras_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+            extras_bottom_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+            display_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+            sound_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+            
+            # Custom Things
+            connection_box = ConnectionsBox()
+            diturb_box = DisturbBox()
+            kbdbrightness_box = KbdBrightnessBox()
+            wirelessdisplay_box = WirelessDisplayBox()
+            display_level_box = DisplayLevelBox()
+            sound_level_box = SoundLevelBox()
+            
+            fix_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+            fix_separator.set_opacity(0.0)
+            extras_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+            extras_separator.set_opacity(0.0)
+            extras_bottom_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
+            extras_bottom_separator.set_opacity(0.0)
+            
+            # All boxes are packaged
+            header_box.pack_start(connection_box, False, True, 10)
+            extras_bottom_box.pack_start(kbdbrightness_box, False, True, 0)
+            extras_bottom_box.pack_start(extras_bottom_separator, False, True, 4)
+            extras_bottom_box.pack_start(wirelessdisplay_box, False, True, 0)
+            extras_box.pack_start(diturb_box, False, True, 0)
+            extras_box.pack_start(extras_separator, False, True, 4)
+            extras_box.pack_start(extras_bottom_box, False, True, 0)
+            header_box.pack_start(extras_box, False, True, 0)
+            header_box.pack_start(fix_separator, False, True, 4)
+            display_box.pack_start(display_level_box, False, True, 10)
+            sound_box.pack_start(sound_level_box, False, True, 10)
+            
+            main_box.pack_start(header_box, False, True, 10)
+            main_box.pack_start(display_box, False, True, 0)
+            main_box.pack_start(sound_box, False, True, 10)
+            
+            self.window.add(main_box)
+            
+            # At the end... show all!
+            self.window.get_style_context().add_class("mainwindow");
+            self.window.show_all();
+            self.window.connect("focus-out-event", self._on_focus_out_event)
+
+        self.window.present()
+    
+    def _on_focus_out_event(self, window, event):
+        window.destroy()
+
+
+if __name__ == "__main__":
+    app = Application()
+    app.run(sys.argv)

@@ -1,0 +1,73 @@
+.mainwindow {
+    background: rgba(255,255,255,0.25);
+    background-image: url("/home/juan/Pictures/bg.png");
+    background-blend-mode: screen;
+    border-radius: 12px;
+    border: 1px solid rgba(200,200,200,0.15);
+}
+
+.styledwidgetbox {
+    background: rgba(205,205,205,0.9);
+    border-radius: 12px;
+}
+
+.general_title {
+    font-family: BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Segoe UI Symbol";
+    font-size: 12px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.general_widget_title {
+    font-family: BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Segoe UI Symbol";
+    font-size: 10px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.general_desc {
+    font-family: BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Segoe UI Symbol";
+    font-size: 10px;
+    font-weight: 500;
+    color: #292929;
+}
+
+.widgetbutton {
+    background: transparent;
+    border: 0px solid transparent;
+}
+
+.sliderbutton {
+    background: transparent;
+    border: 0px solid transparent;
+    box-shadow: 0px 0px 0px transparent;
+    padding: 0px;
+}
+
+.widgetslider {
+    padding: 0px;
+}
+
+.widgetslider highlight {
+    background: #FFFFFF;
+    border: 1px solid #ababab;
+    background-size: 20px 20px;
+    border-radius: 10px;
+}
+
+.widgetslider trough {
+    background: rgba(0,0,0,0.12);
+    background-size: 20px 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border: 1px solid #818181;
+    border-radius: 10px;
+}
+
+.widgetslider slider {
+    background: #FFFFFF;
+    border: 1px solid #ababab;
+    background-size: 20px 20px;
+    min-width: 20px;
+    min-height: 20px;
+}
