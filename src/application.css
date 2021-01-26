@@ -1,6 +1,6 @@
 .mainwindow {
     background: rgba(255,255,255,0.25);
-    background-image: url("/home/juan/Pictures/bg.png");
+    background-image: url("../icons/bg.png");
     background-blend-mode: screen;
     border-radius: 12px;
     border: 1px solid rgba(200,200,200,0.15);

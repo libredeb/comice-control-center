@@ -40,7 +40,7 @@ class SoundLevelBox(Gtk.Box):
         fix_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
         fix_separator.set_opacity(0.0)
         slider_icon_box.pack_start(self.slider, False, True, 0)
-        slider_icon_box.pack_start(fix_separator, False, True, 3)
+        slider_icon_box.pack_start(fix_separator, False, True, 6)
         slider_icon_box.pack_start(display_btn, False, True, 0)
         
         bottom_separator = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
