@@ -1,9 +1,9 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
-from functions.network_information import NetworkInformation
-from functions.bluetooth_information import BluetoothInformation
-from functions.airplane_mode import AirPlaneInformation
+from comicecontrolcenter.functions.network_information import NetworkInformation
+from comicecontrolcenter.functions.bluetooth_information import BluetoothInformation
+from comicecontrolcenter.functions.airplane_mode import AirPlaneInformation
 
 
 class ConnectionsBox(Gtk.Box):
@@ -22,17 +22,17 @@ class ConnectionsBox(Gtk.Box):
         network_icon = None
         if network.get_name() == "ETH":
             if network.is_connected():
-                network_icon = Gtk.Image.new_from_file("../icons/eth.png")
+                network_icon = Gtk.Image.new_from_file("icons/eth.png")
                 network_status = "Connected"
             else:
-                network_icon = Gtk.Image.new_from_file("../icons/eth-d.png")
+                network_icon = Gtk.Image.new_from_file("icons/eth-d.png")
                 network_status = "Not Connected"
         else:
             if network.is_connected ():
-                network_icon = Gtk.Image.new_from_file("../icons/wifi.png")
+                network_icon = Gtk.Image.new_from_file("icons/wifi.png")
                 network_status = network.get_name()
             else:
-                network_icon = Gtk.Image.new_from_file("../icons/wifi-d.png")
+                network_icon = Gtk.Image.new_from_file("icons/wifi-d.png")
                 network_status = "Not Connected"
         
         network_device_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
@@ -70,16 +70,16 @@ class ConnectionsBox(Gtk.Box):
         bluetooth_icon = None
         if bluetooth.exists():
             if bluetooth.is_powered_on():
-                bluetooth_icon = Gtk.Image.new_from_file("../icons/bluetooth.png")
+                bluetooth_icon = Gtk.Image.new_from_file("icons/bluetooth.png")
                 if len(bluetooth.get_name()) > 0:
                     bluetooth_status = bluetooth.get_name()
                 else:
                     bluetooth_status = "On"
             else:
-                bluetooth_icon = Gtk.Image.new_from_file("../icons/bluetooth-d.png")
+                bluetooth_icon = Gtk.Image.new_from_file("icons/bluetooth-d.png")
                 bluetooth_status = "Off"
         else:
-            bluetooth_icon = Gtk.Image.new_from_file("../icons/bluetooth-d.png")
+            bluetooth_icon = Gtk.Image.new_from_file("icons/bluetooth-d.png")
             bluetooth_status = "Not Available"
         
         bluetooth_device_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
@@ -111,10 +111,10 @@ class ConnectionsBox(Gtk.Box):
         airplane_conn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         airplane_icon = None
         if airplane.get_state():
-            airplane_icon = Gtk.Image.new_from_file("../icons/airplane.png")
+            airplane_icon = Gtk.Image.new_from_file("icons/airplane.png")
             airplane_status = "On"
         else:
-            airplane_icon = Gtk.Image.new_from_file("../icons/airplane-d.png")
+            airplane_icon = Gtk.Image.new_from_file("icons/airplane-d.png")
             airplane_status = "Off"
         airplane_device_box = Gtk.Box(Gtk.Orientation.HORIZONTAL, 0)
         airplane_device = Gtk.Label("")

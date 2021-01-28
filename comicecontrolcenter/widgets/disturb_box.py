@@ -1,7 +1,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
-from functions.do_not_disturb import DoNotDisturbInformation
+from comicecontrolcenter.functions.do_not_disturb import DoNotDisturbInformation
 
 
 class DisturbBox(Gtk.Box):
@@ -18,9 +18,9 @@ class DisturbBox(Gtk.Box):
         disturb_name_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         disturb_icon = None
         if disturb.get_state():
-            disturb_icon = Gtk.Image.new_from_file("../icons/disturb.png")
+            disturb_icon = Gtk.Image.new_from_file("icons/disturb.png")
         else:
-            disturb_icon = Gtk.Image.new_from_file("../icons/disturb-d.png")
+            disturb_icon = Gtk.Image.new_from_file("icons/disturb-d.png")
         
         disturb_1st_line_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         disturb_1st_line = Gtk.Label("")

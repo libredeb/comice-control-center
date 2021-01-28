@@ -1,14 +1,16 @@
+#!/usr/bin/python3
+
 import sys
 from warnings import warn
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio, Gdk
-from widgets.connection_box import ConnectionsBox
-from widgets.disturb_box import DisturbBox
-from widgets.keyboard_brightness import KbdBrightnessBox
-from widgets.wireless_display import WirelessDisplayBox
-from widgets.display_level import DisplayLevelBox
-from widgets.sound_box import SoundLevelBox
+from comicecontrolcenter.widgets.connection_box import ConnectionsBox
+from comicecontrolcenter.widgets.disturb_box import DisturbBox
+from comicecontrolcenter.widgets.keyboard_brightness import KbdBrightnessBox
+from comicecontrolcenter.widgets.wireless_display import WirelessDisplayBox
+from comicecontrolcenter.widgets.display_level import DisplayLevelBox
+from comicecontrolcenter.widgets.sound_box import SoundLevelBox
 
 
 class Application(Gtk.Application):
@@ -44,7 +46,7 @@ class Application(Gtk.Application):
             self.window.move(position.root_x, position.root_y + 32)
             
             # CSS Styles
-            css_file = "./application.css"
+            css_file = "./comicecontrolcenter/application.css"
             css_provider = Gtk.CssProvider()
 
             try:

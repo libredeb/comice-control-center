@@ -1,24 +1,24 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib, Gio
-from functions.sound_device import SoundInformation
+from comicecontrolcenter.functions.brightness_device import BrightnessInformation
 
 
-class SoundLevelBox(Gtk.Box):
+class DisplayLevelBox(Gtk.Box):
 
     def __init__(self):
-        """ Sound Level Box."""
+        """ Display Level Box."""
         super().__init__()
         main_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         slider_icon_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         
         # Custom Function
-        sound = SoundInformation()
+        brightness = BrightnessInformation()
         
         display_name_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         display_name = Gtk.Label("")
-        display_name.set_markup("<b>Sound</b>")
+        display_name.set_markup("<b>Display</b>")
         display_name.get_style_context().add_class("general_title")
         display_name_box.pack_start(display_name, False, True, 0)
         
@@ -29,10 +29,10 @@ class SoundLevelBox(Gtk.Box):
         self.slider.set_valign(Gtk.Align.START)
         self.slider.connect("move-slider", self.scale_moved)
         self.slider.get_style_context().add_class("widgetslider")
-        self.slider.set_value(sound.get_volume())
+        self.slider.set_value(brightness.get_current_brightness())
         display_btn = Gtk.Button()
         display_btn.get_style_context().add_class("sliderbutton")
-        display_icon = Gtk.Image.new_from_file("../icons/control-sound.png")
+        display_icon = Gtk.Image.new_from_file("icons/control-display.png")
         grid = Gtk.Grid()
         grid.attach(display_icon,0,0,1,1)
         grid.show_all()
