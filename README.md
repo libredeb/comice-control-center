@@ -8,7 +8,10 @@ It is being developed for **comiceOS**.
 
 
 ## Compilation
-`Soon`
+1. Install python3 dependencies:
+```bash
+sudo pip3 install pydbus
+```
 
 ## Changelog
 **Version 0.0.1**
