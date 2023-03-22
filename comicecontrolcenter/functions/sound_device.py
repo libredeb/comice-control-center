@@ -13,7 +13,7 @@ class SoundInformation():
         super().__init__()
         self.device = None
         
-        command = """amixer sget Master | awk -F"[][]" '/Left:/ { print $2 }'"""
+        command = """amixer -D pulse sget Master | awk -F"[][]" '/Left:/ { print $2 }'"""
         result = os.popen(command).read()
         
         if len(result) > 0:

@@ -10,17 +10,26 @@ It is being developed for **comiceOS**.
 ## Compilation
 
 1. Install build dependencies:
-```bash
-sudo dnf install python3 python3-dbus util-linux gsettings-desktop-schemas wireless-tools iproute alsa-utils
-```
+
+* For Ubuntu:
+    ```bash
+    $ sudo apt-get install python3 python3-dbus util-linux gsettings-desktop-schemas wireless-tools iw iproute2 alsa-utils python3-pip
+    ```
+
+* For Fedora:
+    ```bash
+    $ sudo dnf install python3 python3-dbus util-linux gsettings-desktop-schemas wireless-tools iproute alsa-utils
+    ```
+
 2. Install python3 (pip) dependencies:
-```bash
-sudo pip3 install -r requirements.txt
-```
+    ```bash
+    $ sudo pip3 install -r requirements.txt
+    ```
+
 3. Run `comice-control-center` standalone:
-```bash
-./comice-control-center
-```
+    ```bash
+    $ ./comice-control-center
+    ```
 
 ## Changelog
 **Version 0.0.1**
