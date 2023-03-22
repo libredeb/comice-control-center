@@ -12,7 +12,7 @@ class BluetoothInformation():
         self.name = ""
         if self.device_exist():
             self.exist = True
-            command = """cat /sys/class/bluetooth/hci0/rf*/state"""
+            command = """cat /sys/class/bluetooth/hci*/rf*/state"""
             result = os.popen(command).read()
             powered_on = int(result)
             if powered_on > 0:
