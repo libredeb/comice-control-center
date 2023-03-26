@@ -1,5 +1,5 @@
 # comice-control-center
-A simply control center to monitor connections such as WiFi, Bluetooth, etc. And Monitor brightness level and sound volume.
+A simply control center to monitor connections such as WiFi, Bluetooth, etc. The brightness level of the Monitor and sound volume.
 
 It is being developed for **comiceOS**.
 
@@ -30,6 +30,8 @@ It is being developed for **comiceOS**.
     ```bash
     $ ./comice-control-center
     ```
+
+    > **NOTE:** if you are in a `Wayland` session, you will need to specify the X11 compatibility with by adding the environment variable `GDK_BACKEND=x11` for the application to work properly.
 
 ## Changelog
 **Version 0.0.1**
