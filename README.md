@@ -31,7 +31,11 @@ It is being developed for **comiceOS**.
     $ ./comice-control-center
     ```
 
-    > **NOTE:** if you are in a `Wayland` session, you will need to specify the X11 compatibility with by adding the environment variable `GDK_BACKEND=x11` for the application to work properly.
+    > **NOTE:** if you are in a `Wayland` session, you will need to specify the X11 compatibility with by adding the environment variable `GDK_BACKEND=x11` at the begging of the run command for the application to work properly.
+    > For example:
+    > ```bash
+    > $ GDK_BACKEND=x11 ./comice-control-center
+    > ```
 
 ## Changelog
 **Version 0.0.1**
