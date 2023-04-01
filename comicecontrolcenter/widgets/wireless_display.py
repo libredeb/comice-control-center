@@ -39,7 +39,7 @@ class WirelessDisplayBox(Gtk.Box):
     
     def do_open_kbdbrightness_app(self, event):
         try:
-            GLib.spawn_command_line_async("""/bin/bash -c '/usr/bin/gnome-control-center display &'""")
+            GLib.spawn_command_line_async("""/bin/bash -c '/usr/bin/gnome-control-center bluetooth &'""")
         except:
             print("Error opening APP.AIR_DISPLAY")
 

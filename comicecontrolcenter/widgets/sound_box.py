@@ -30,18 +30,19 @@ class SoundLevelBox(Gtk.Box):
         self.slider.connect("move-slider", self.scale_moved)
         self.slider.get_style_context().add_class("widgetslider")
         self.slider.set_value(sound.get_volume())
-        display_btn = Gtk.Button()
-        display_btn.get_style_context().add_class("sliderbutton")
-        display_icon = Gtk.Image.new_from_file("icons/control-sound.png")
+        sound_btn = Gtk.Button()
+        sound_btn.get_style_context().add_class("sliderbutton")
+        sound_icon = Gtk.Image.new_from_file("icons/control-sound.png")
         grid = Gtk.Grid()
-        grid.attach(display_icon,0,0,1,1)
+        grid.attach(sound_icon,0,0,1,1)
         grid.show_all()
-        display_btn.add (grid)
+        sound_btn.add (grid)
+        sound_btn.connect("clicked", self.do_open_sound_app)
         fix_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
         fix_separator.set_opacity(0.0)
         slider_icon_box.pack_start(self.slider, False, True, 0)
         slider_icon_box.pack_start(fix_separator, False, True, 6)
-        slider_icon_box.pack_start(display_btn, False, True, 0)
+        slider_icon_box.pack_start(sound_btn, False, True, 0)
         
         bottom_separator = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
         bottom_separator.set_opacity(0.0)
@@ -55,7 +56,17 @@ class SoundLevelBox(Gtk.Box):
         
         self.pack_start(main_box, True, True, 8)
         self.get_style_context().add_class("styledwidgetbox")
+
+        self.slider.connect("value_changed", self.scale_moved)
         
     def scale_moved(self, event):
-        print("SLIDER VALUE: {}".format(str(int(self.slider.get_value()))))
+        try:
+            GLib.spawn_command_line_async(f"""/bin/bash -c 'pactl set-sink-volume 1 {int(self.slider.get_value())}%'""")
+        except:
+            print("Error changing the value of your volume level")
 
+    def do_open_sound_app(self, event):
+        try:
+            GLib.spawn_command_line_async("""/bin/bash -c '/usr/bin/gnome-control-center sound &'""")
+        except:
+            print("Error opening APP.SOUND")

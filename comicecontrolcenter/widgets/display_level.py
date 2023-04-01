@@ -37,6 +37,7 @@ class DisplayLevelBox(Gtk.Box):
         grid.attach(display_icon,0,0,1,1)
         grid.show_all()
         display_btn.add (grid)
+        display_btn.connect("clicked", self.do_open_display_app)
         fix_separator = Gtk.Separator(orientation=Gtk.Orientation.VERTICAL)
         fix_separator.set_opacity(0.0)
         slider_icon_box.pack_start(self.slider, False, True, 0)
@@ -55,7 +56,25 @@ class DisplayLevelBox(Gtk.Box):
         
         self.pack_start(main_box, True, True, 8)
         self.get_style_context().add_class("styledwidgetbox")
+
+        self.slider.connect("value_changed", self.scale_moved)
         
     def scale_moved(self, event):
-        print("SLIDER VALUE: {}".format(str(int(self.slider.get_value()))))
+        try:
+            GLib.spawn_command_line_async(f"""/bin/bash -c 'dbus-send \
+                                                            --session \
+                                                            --type=method_call \
+                                                            --dest="org.gnome.SettingsDaemon.Power" \
+                                                            /org/gnome/SettingsDaemon/Power \
+                                                            org.freedesktop.DBus.Properties.Set \
+                                                            string:"org.gnome.SettingsDaemon.Power.Screen" \
+                                                            string:"Brightness" \
+                                                            variant:int32:{int(self.slider.get_value())}'""")
+        except:
+            print("Error changing the value of your display brightness level")
 
+    def do_open_display_app(self, event):
+        try:
+            GLib.spawn_command_line_async("""/bin/bash -c '/usr/bin/gnome-control-center display &'""")
+        except:
+            print("Error opening APP.DISPLAY")

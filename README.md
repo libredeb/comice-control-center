@@ -13,12 +13,12 @@ It is being developed for **comiceOS**.
 
 * For Ubuntu:
     ```bash
-    $ sudo apt-get install python3 python3-dbus util-linux gsettings-desktop-schemas wireless-tools iw iproute2 alsa-utils python3-pip
+    $ sudo apt-get install python3 python3-pip python3-dbus dbus util-linux gsettings-desktop-schemas wireless-tools iw iproute2 alsa-utils pulseaudio-utils
     ```
 
 * For Fedora:
     ```bash
-    $ sudo dnf install python3 python3-dbus util-linux gsettings-desktop-schemas wireless-tools iproute alsa-utils
+    $ sudo dnf install python3 python3-dbus dbus util-linux gsettings-desktop-schemas wireless-tools iproute alsa-utils pulseaudio-utils
     ```
 
 2. Install python3 (pip) dependencies:
